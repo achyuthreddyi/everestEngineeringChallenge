@@ -1,0 +1,11 @@
+{
+  "name": "everest_coding_kiki_cs",
+  "version": "1.0.0",
+  "description": "coding challenge by everest engineering",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "achyuth reddy",
+  "license": "ISC"
+}
