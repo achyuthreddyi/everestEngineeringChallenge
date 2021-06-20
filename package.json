@@ -4,7 +4,7 @@
   "description": "coding challenge by everest engineering",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watchAll"
   },
   "author": "achyuth reddy",
   "license": "ISC",
