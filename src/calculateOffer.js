@@ -1,4 +1,5 @@
 const offerCodes = require('./offerCodes')
+const between = require('./util/between')
 
 function calculateOffer({
   pkg_id,
@@ -6,6 +7,8 @@ function calculateOffer({
   distance_in_km,
   offer_code,
   base_price,
+  cost_of_unit_distance = 5,
+  cost_of_unit_weight = 10,
 }) {
   if (
     !pkg_id ||
@@ -20,15 +23,23 @@ function calculateOffer({
     return 'Please enter a valid offerCode '
 
   let price_after_discount =
-    base_price + pkg_weight_in_kg * 10 + distance_in_km * 5
+    base_price +
+    pkg_weight_in_kg * cost_of_unit_weight +
+    distance_in_km * cost_of_unit_distance
 
   if (!offer_code) return price_after_discount
 
   if (
-    distance_in_km >= offerCodes[offer_code].distance_range.min &&
-    distance_in_km <= offerCodes[offer_code].distance_range.max &&
-    pkg_weight_in_kg >= offerCodes[offer_code].weight_range.min &&
-    pkg_weight_in_kg <= offerCodes[offer_code].weight_range.max
+    between(
+      distance_in_km,
+      offerCodes[offer_code].distance_range.min,
+      offerCodes[offer_code].distance_range.max
+    ) &&
+    between(
+      pkg_weight_in_kg,
+      offerCodes[offer_code].weight_range.min,
+      offerCodes[offer_code].weight_range.max
+    )
   ) {
     let discount = (offerCodes[offer_code].offer / 100) * price_after_discount
     price_after_discount = price_after_discount - discount
