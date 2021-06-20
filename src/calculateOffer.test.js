@@ -55,5 +55,16 @@ describe('verify CalulateOffer function ', () => {
         })
       ).toEqual(275)
     })
+    test('Valid offerCode', () => {
+      expect(
+        calculateOffer({
+          pkg_id: 'PKG1',
+          pkg_weight_in_kg: 155,
+          distance_in_km: 50,
+          offer_code: 'OFR002',
+          base_price: 100,
+        })
+      ).toEqual(1767)
+    })
   })
 })

@@ -29,14 +29,12 @@ function calculateOffer({
     distance_in_km <= offerCodes[offer_code].distance_range.max &&
     pkg_weight_in_kg >= offerCodes[offer_code].weight_range.min &&
     pkg_weight_in_kg <= offerCodes[offer_code].weight_range.max
-  )
-    price_after_discount =
-      price_after_discount -
-      (offerCodes[offer_code].offer / 100) * price_after_discount
-  console.log(offerCodes[offer_code].distance_range.min)
-  console.log(price_after_discount)
+  ) {
+    let discount = (offerCodes[offer_code].offer / 100) * price_after_discount
+    price_after_discount = price_after_discount - discount
+  }
 
-  return 'valid offer code'
+  return price_after_discount
 }
 
 module.exports = calculateOffer
