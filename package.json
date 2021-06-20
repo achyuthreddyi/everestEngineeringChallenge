@@ -4,8 +4,14 @@
   "description": "coding challenge by everest engineering",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "achyuth reddy",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.0.4"
+  },
+  "dependencies": {
+    "standard": "^16.0.3"
+  }
 }
