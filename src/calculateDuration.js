@@ -1,5 +1,6 @@
 const getNextWeightIndex = require('./util/nextWeightInList')
-
+const elementsWithoutDuration = require('./util/elementsWithoutDuration')
+const minDistancePackage = require('./util/minDistancePackage')
 function calculateDuration({
   listCount,
   inputList,
@@ -9,7 +10,7 @@ function calculateDuration({
   const condition = element =>
     element.weight === undefined || element.distance === undefined
   const vehicleArray = Array(noOfVehicles).fill(0)
-  //   const vehicleArray = [2, 4]
+
   if (
     !listCount ||
     !inputList ||
@@ -23,12 +24,16 @@ function calculateDuration({
   let newUpdatedList = [...inputList]
 
   while (inputList.some(element => element.duration === undefined)) {
-    const nextIndexToWorkOn = getNextWeightIndex(newUpdatedList, 200)
+    const nextIndexToWorkOn = minDistancePackage(
+      getNextWeightIndex(newUpdatedList, 200),
+      inputList
+    )
+    console.log(' next input to work on ', nextIndexToWorkOn)
 
     let durationForSingleTrip = 0
     const minVehicle = Math.min(...vehicleArray)
 
-    nextIndexToWorkOn[0].forEach(element => {
+    nextIndexToWorkOn.forEach(element => {
       let indidurationForSingleTrip =
         parseInt((inputList[element].distance / speedOfVehicle) * 100) / 100
 
@@ -43,7 +48,7 @@ function calculateDuration({
     vehicleArray[vehicleArray.indexOf(minVehicle)] =
       minVehicle + 2 * durationForSingleTrip
 
-    newUpdatedList = elementsWithoutWeights(inputList)
+    newUpdatedList = elementsWithoutDuration(inputList)
   }
 
   return inputList
@@ -52,9 +57,9 @@ console.log(
   calculateDuration({
     listCount: 5,
     inputList: [
-      { weight: 150, index: 0, distance: 30 },
-      { weight: 80, index: 1, distance: 125 },
-      { weight: 120, index: 2, distance: 100 },
+      { weight: 100, index: 0, distance: 30 },
+      { weight: 75, index: 1, distance: 125 },
+      { weight: 175, index: 2, distance: 100 },
       { weight: 40, index: 3, distance: 60 },
       { weight: 155, index: 4, distance: 95 },
     ],
@@ -64,7 +69,3 @@ console.log(
 )
 
 module.exports = calculateDuration
-
-function elementsWithoutWeights(list) {
-  return list.filter(element => element.duration === undefined)
-}
