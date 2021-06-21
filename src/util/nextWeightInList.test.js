@@ -1,16 +1,16 @@
 const { expect } = require('@jest/globals')
-const getNextWeightInList = require('./nextWeightInList')
+const getNextWeightIndex = require('./nextWeightInList')
 
 describe('verify calculate find next potential weights to be function', () => {
   describe('Invalid arguments', () => {
     test('No input array or no individual values, passes ', () => {
-      expect(getNextWeightInList([], 200)).toEqual('Invalid Inputs')
+      expect(getNextWeightIndex([], 200)).toEqual('Invalid Inputs')
     })
   })
   describe('Valid arguments', () => {
     test('Valid input array, passes ', () => {
       expect(
-        getNextWeightInList(
+        getNextWeightIndex(
           [
             { weight: 100, index: 0 },
             { weight: 75, index: 1 },
@@ -27,7 +27,7 @@ describe('verify calculate find next potential weights to be function', () => {
     })
     test('Valid input array, passes ', () => {
       expect(
-        getNextWeightInList(
+        getNextWeightIndex(
           [
             { weight: 50, index: 0 },
             { weight: 75, index: 1 },
@@ -41,7 +41,7 @@ describe('verify calculate find next potential weights to be function', () => {
     })
     test('Valid input array, passes ', () => {
       expect(
-        getNextWeightInList(
+        getNextWeightIndex(
           [
             { weight: 50, index: 0 },
             { weight: 60, index: 1 },

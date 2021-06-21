@@ -1,23 +1,70 @@
-function calculateDuration({ length, inputArray }) {
+const getNextWeightIndex = require('./util/nextWeightInList')
+
+function calculateDuration({
+  listCount,
+  inputList,
+  noOfVehicles,
+  speedOfVehicle,
+}) {
   const condition = element =>
     element.weight === undefined || element.distance === undefined
+  const vehicleArray = Array(noOfVehicles).fill(0)
+  //   const vehicleArray = [2, 4]
   if (
-    !length ||
-    !inputArray ||
-    inputArray.length !== length ||
-    inputArray.some(condition)
+    !listCount ||
+    !inputList ||
+    inputList.length !== listCount ||
+    !speedOfVehicle ||
+    !noOfVehicles ||
+    inputList.some(condition)
   )
     return 'Please enter all the elements in the input array for the given length '
-  return 'valid input'
+
+  let newUpdatedList = [...inputList]
+
+  while (inputList.some(element => element.duration === undefined)) {
+    const nextIndexToWorkOn = getNextWeightIndex(newUpdatedList, 200)
+
+    let durationForSingleTrip = 0
+    const minVehicle = Math.min(...vehicleArray)
+
+    nextIndexToWorkOn[0].forEach(element => {
+      let indidurationForSingleTrip =
+        parseInt((inputList[element].distance / speedOfVehicle) * 100) / 100
+
+      inputList[element].duration =
+        parseInt((minVehicle + indidurationForSingleTrip) * 100) / 100
+      durationForSingleTrip = Math.max(
+        indidurationForSingleTrip,
+        durationForSingleTrip
+      )
+    })
+
+    vehicleArray[vehicleArray.indexOf(minVehicle)] =
+      minVehicle + 2 * durationForSingleTrip
+
+    newUpdatedList = elementsWithoutWeights(inputList)
+  }
+
+  return inputList
 }
-// calculateDuration({
-//   length: 4,
-//   inputArray: {
-//     PKG1: { weight: 50, distance: 30 },
-//     PKG2: { weight: 75, distance: 125 },
-//     PKG3: { weight: 175, distance: 100 },
-//     PKG4: { weight: 110, distance: 60 },
-//     PKG5: { weight: 155, distance: 95 },
-//   },
-// })
+console.log(
+  calculateDuration({
+    listCount: 5,
+    inputList: [
+      { weight: 150, index: 0, distance: 30 },
+      { weight: 80, index: 1, distance: 125 },
+      { weight: 120, index: 2, distance: 100 },
+      { weight: 40, index: 3, distance: 60 },
+      { weight: 155, index: 4, distance: 95 },
+    ],
+    speedOfVehicle: 70,
+    noOfVehicles: 2,
+  })
+)
+
 module.exports = calculateDuration
+
+function elementsWithoutWeights(list) {
+  return list.filter(element => element.duration === undefined)
+}

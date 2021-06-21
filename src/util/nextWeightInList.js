@@ -1,4 +1,4 @@
-function getNextWeightInList(list, largestSumPossible) {
+function getNextWeightIndex(list, largestSumPossible) {
   if (!list || list.length == 0 || !largestSumPossible) return 'Invalid Inputs'
   let resultObj = []
   let localHighestSum = 0
@@ -37,16 +37,16 @@ function getNextWeightInList(list, largestSumPossible) {
   return indexArray
 }
 
-console.log(
-  getNextWeightInList(
-    [
-      { weight: 50, index: 0 },
-      { weight: 60, index: 1 },
-      { weight: 175, index: 2 },
-      { weight: 110, index: 3 },
-      { weight: 155, index: 4 },
-    ],
-    200
-  )
-)
-module.exports = getNextWeightInList
+// console.log(
+//   getNextWeightIndex(
+//     [
+//       { weight: 50, index: 0 },
+//       { weight: 75, index: 1 },
+//       { weight: 175, index: 2 },
+//       { weight: 110, index: 3 },
+//       { weight: 155, index: 4 },
+//     ],
+//     200
+//   )
+// )
+module.exports = getNextWeightIndex

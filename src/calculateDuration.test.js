@@ -6,7 +6,6 @@ describe('verify calculate Duration function', () => {
     test('No input array or no individual values ', () => {
       expect(
         calculateDuration({
-          length: 4,
           inputArray: [],
         })
       ).toEqual(
@@ -14,20 +13,28 @@ describe('verify calculate Duration function', () => {
       )
     })
   })
-  //   describe('Valid arguments, passes', () => {
-  //     test('Valid inputs  ', () => {
-  //       expect(
-  //         calculateDuration({
-  //           length: 5,
-  //           inputArray: {
-  //             PKG1: { weight: 50, distance: 30 },
-  //             PKG2: { weight: 75, distance: 125 },
-  //             PKG3: { weight: 175, distance: 100 },
-  //             PKG4: { weight: 110, distance: 60 },
-  //             PKG5: { weight: 155, distance: 95 },
-  //           },
-  //         })
-  //       ).toEqual()
-  //     })
-  //   })
+  describe('Valid arguments, passes', () => {
+    test('Valid inputs  ', () => {
+      expect(
+        calculateDuration({
+          listCount: 5,
+          inputList: [
+            { weight: 50, index: 0, distance: 30 },
+            { weight: 75, index: 1, distance: 125 },
+            { weight: 175, index: 2, distance: 100 },
+            { weight: 110, index: 3, distance: 60 },
+            { weight: 155, index: 4, distance: 95 },
+          ],
+          speedOfVehicle: 70,
+          noOfVehicles: 2,
+        })
+      ).toEqual([
+        { weight: 50, index: 0, distance: 30, duration: 3.98 },
+        { weight: 75, index: 1, distance: 125, duration: 1.78 },
+        { weight: 175, index: 2, distance: 100, duration: 1.42 },
+        { weight: 110, index: 3, distance: 60, duration: 0.85 },
+        { weight: 155, index: 4, distance: 95, duration: 4.18 },
+      ])
+    })
+  })
 })
