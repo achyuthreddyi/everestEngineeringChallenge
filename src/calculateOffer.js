@@ -48,4 +48,13 @@ function calculateOffer({
   return price_after_discount
 }
 
+// console.log(
+//   calculateOffer({
+//     pkg_id: 'PKG1',
+//     pkg_weight_in_kg: 155,
+//     distance_in_km: 95,
+//     base_price: 100,
+//     // offer_code: 'OFR002',
+//   })
+// )
 module.exports = calculateOffer
