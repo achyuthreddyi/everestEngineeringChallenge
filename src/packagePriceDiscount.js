@@ -1,4 +1,7 @@
-const offerCodes = require('./offerCodes')
+const offerCodes = require('./offerCodes.json')
+function isBetween(value, min, max) {
+  return value >= min && value <= max
+}
 
 function getPackagePriceDiscount({
   pkgId,
@@ -24,16 +27,21 @@ function getPackagePriceDiscount({
     distanceInKm * costOfUnitDistance
   let discount = 0
 
-  if (!offerCode || (offerCode && !(offerCode.toUpperCase() in offerCodes)))
-    return { price, discount }
+  offerCode =
+    offerCode &&
+    offerCode
+      .split(/[ ,]+/)
+      .find(element => element.toUpperCase() in offerCodes)
+
+  if (!offerCode) return { price, discount }
 
   if (
-    between(
+    isBetween(
       distanceInKm,
       offerCodes[offerCode].distanceRange.min,
       offerCodes[offerCode].distanceRange.max
     ) &&
-    between(
+    isBetween(
       pkgWeightInKg,
       offerCodes[offerCode].weightRange.min,
       offerCodes[offerCode].weightRange.max
@@ -47,7 +55,3 @@ function getPackagePriceDiscount({
 }
 
 module.exports = getPackagePriceDiscount
-
-function between(value, min, max) {
-  return value >= min && value <= max
-}

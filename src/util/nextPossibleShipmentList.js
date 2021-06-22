@@ -1,6 +1,7 @@
 function getNextPossibleShipmentsList(packageList, maxCarriableCapacity) {
   if (!packageList || packageList.length == 0 || !maxCarriableCapacity)
     return 'Invalid Inputs'
+
   let possiblePackages = []
   let localHighestSum = 0
   const possiblePackagesIndices = []

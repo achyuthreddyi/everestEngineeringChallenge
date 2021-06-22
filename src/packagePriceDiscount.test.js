@@ -32,6 +32,17 @@ describe('verify CalulateOffer function ', () => {
         })
       ).toEqual({ price: 155, discount: 0 })
     })
+    test('Two invalid offercode', () => {
+      expect(
+        getPackagePriceDiscount({
+          pkgId: 'PKG1',
+          pkgWeightInKg: 3,
+          distanceInKm: 5,
+          basePrice: 100,
+          offerCode: 'invalidOfferCode1, invalidOfferCode2',
+        })
+      ).toEqual({ price: 155, discount: 0 })
+    })
   })
 
   describe('valid arguments, passes', () => {
@@ -62,6 +73,17 @@ describe('verify CalulateOffer function ', () => {
           pkgWeightInKg: 155,
           distanceInKm: 50,
           offerCode: 'OFR002',
+          basePrice: 100,
+        })
+      ).toEqual({ price: 1767, discount: 133 })
+    })
+    test('Valid 2 or more offerCodes ', () => {
+      expect(
+        getPackagePriceDiscount({
+          pkgId: 'PKG1',
+          pkgWeightInKg: 155,
+          distanceInKm: 50,
+          offerCode: 'OFR002 OFR003',
           basePrice: 100,
         })
       ).toEqual({ price: 1767, discount: 133 })

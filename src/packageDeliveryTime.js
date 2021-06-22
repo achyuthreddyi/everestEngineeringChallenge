@@ -26,33 +26,34 @@ function getPackageDeliveryTime({
   let calculatedPackageList = [...packageList]
 
   while (newUpdatedPackageList.length > 0) {
-    const nextDelivery = getClosestShipment(
-      getNextPossibleShipmentsList(newUpdatedPackageList, 200),
-      packageList
+    const possibleShipmentList = getNextPossibleShipmentsList(
+      newUpdatedPackageList,
+      200
     )
-
-    let durationForSingleTrip = 0
+    const nextDelivery = getClosestShipment(possibleShipmentList, packageList)
 
     const nextAvailabeAt = Math.min(...vehicleAvailabilityArray)
 
+    let durationForSingleTrip = 0
     nextDelivery.forEach(element => {
+      let currentPackage = calculatedPackageList[element]
       let deliveryTime =
         Math.trunc((packageList[element].distance / maxSpeed) * 100) / 100
 
-      packageList[element].duration =
+      currentPackage.duration =
         Math.trunc((nextAvailabeAt + deliveryTime) * 100) / 100
 
       const packagePriceDiscount = getPackagePriceDiscount({
         pkgId: '001',
-        pkgWeightInKg: packageList[element].weight,
-        distanceInKm: packageList[element].distance,
+        pkgWeightInKg: currentPackage.weight,
+        distanceInKm: currentPackage.distance,
         basePrice: 100,
-        offerCode: packageList[element].pkgOfr,
+        offerCode: currentPackage.pkgOfr,
       })
 
-      calculatedPackageList[element].deliveryCost = packagePriceDiscount.price
+      currentPackage.deliveryCost = packagePriceDiscount.price
 
-      calculatedPackageList[element].discount = packagePriceDiscount.discount
+      currentPackage.discount = packagePriceDiscount.discount
 
       durationForSingleTrip = Math.max(deliveryTime, durationForSingleTrip)
     })
