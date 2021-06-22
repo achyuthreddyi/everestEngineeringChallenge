@@ -13,10 +13,5 @@
     "discount": 5,
     "distanceRange": { "min": 50, "max": 250 },
     "weightRange": { "min": 10, "max": 150 }
-  },
-  "OFR010": {
-    "discount": 7,
-    "distanceRange": { "min": 50, "max": 150 },
-    "weightRange": { "min": 100, "max": 250 }
   }
 }

@@ -1,36 +1,63 @@
 const fs = require('fs')
 const offerCodes = require('./offerCodes.json')
 
-const abc = 'OFR010'
-let newOffer = {
-  OFR002: {
-    discount: 7,
+function addNewOfferCode({
+  offerId,
+  discount,
+  minWeight,
+  maxWeight,
+  minDistance,
+  maxDistance,
+}) {
+  if (
+    !offerId ||
+    !discount ||
+    !minWeight ||
+    !maxWeight ||
+    !minDistance ||
+    !maxDistance
+  )
+    return 'Please enter all valid inputs'
+
+  console.log(offerId, discount, minWeight, maxWeight, minDistance, maxDistance)
+
+  offerCodes[offerId.toUpperCase()] = {
+    discount,
     distanceRange: {
-      min: 50,
-      max: 150,
+      min: minDistance,
+      max: maxDistance,
     },
     weightRange: {
-      min: 100,
-      max: 250,
+      min: minWeight,
+      max: maxWeight,
     },
-  },
+  }
+  fs.writeFileSync('offerCodes.json', JSON.stringify(offerCodes), err => {
+    if (err) throw err
+  })
+  console.log('Offer added successfully')
+  return
 }
-;(offerCodes[abc] = {
-  discount: 7,
-  distanceRange: {
-    min: 50,
-    max: 150,
-  },
-  weightRange: {
-    min: 100,
-    max: 250,
-  },
-}),
-  console.log('newOffer', offerCodes)
-fs.writeFile('offerCodes.json', JSON.stringify(offerCodes), err => {
-  // Checking for errors
-  if (err) throw err
+let functionADd = data => addNewOfferCode(data)
+module.exports = addNewOfferCode
 
-  console.log('Done writing') // Success
-})
-// console.log(offerCodes[abc])
+// console.log(
+//   functionADd({
+//     offerId: 'gaga23',
+//     discount: 100,
+//     minDistance: 4,
+//     maxDistance: 5,
+//     maxWeight: 76,
+//     minWeight: 56,
+//   })
+// )
+// console.log(
+//   addNewOfferCode({
+//     offerId: 'achyuth',
+//     discount: 100,
+//     minDistance: 4,
+//     maxDistance: 5,
+//     maxWeight: 76,
+//     minWeight: 56,
+//   })
+// )

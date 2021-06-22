@@ -1,4 +1,6 @@
 const offerCodes = require('./offerCodes.json')
+const addNewOfferCode = require('./gettingOfferCodes')
+
 function isBetween(value, min, max) {
   return value >= min && value <= max
 }
@@ -53,5 +55,16 @@ function getPackagePriceDiscount({
 
   return { price, discount }
 }
+
+console.log(
+  addNewOfferCode({
+    offerId: 'gaga256dfdf',
+    discount: 100,
+    minDistance: 4,
+    maxDistance: 5,
+    maxWeight: 76,
+    minWeight: 56,
+  })
+)
 
 module.exports = getPackagePriceDiscount
