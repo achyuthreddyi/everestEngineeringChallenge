@@ -1,4 +1,4 @@
-const addNewOfferCode = require('./gettingOfferCodes')
+const addNewOfferCode = require('./addOfferCodes')
 
 // console.log(
 addNewOfferCode({
