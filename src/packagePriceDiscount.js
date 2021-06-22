@@ -31,7 +31,7 @@ function getPackagePriceDiscount({
     offerCode &&
     offerCode
       .split(/[ ,]+/)
-      .find(element => element.toUpperCase() in offerCodes)
+      .find(element => offerCodes.hasOwnProperty(element.toUpperCase()))
 
   if (!offerCode) return { price, discount }
 
