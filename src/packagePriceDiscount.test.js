@@ -30,7 +30,7 @@ describe('verify CalulateOffer function ', () => {
           basePrice: 100,
           offerCode: 'OFR01',
         })
-      ).toEqual({ price: 155, discount: 0 })
+      ).toEqual({ price: 155, discount: 0, pkgId: 'PKG1' })
     })
     test('Two invalid offercode', () => {
       expect(
@@ -41,7 +41,7 @@ describe('verify CalulateOffer function ', () => {
           basePrice: 100,
           offerCode: 'invalidOfferCode1, invalidOfferCode2',
         })
-      ).toEqual({ price: 155, discount: 0 })
+      ).toEqual({ price: 155, discount: 0, pkgId: 'PKG1' })
     })
   })
 
@@ -54,7 +54,7 @@ describe('verify CalulateOffer function ', () => {
           distanceInKm: 5,
           basePrice: 100,
         })
-      ).toEqual({ price: 175, discount: 0 })
+      ).toEqual({ price: 175, discount: 0, pkgId: 'PKG1' })
     })
     test('Valid offerCode', () => {
       expect(
@@ -64,7 +64,7 @@ describe('verify CalulateOffer function ', () => {
           distanceInKm: 5,
           basePrice: 100,
         })
-      ).toEqual({ price: 275, discount: 0 })
+      ).toEqual({ price: 275, discount: 0, pkgId: 'PKG1' })
     })
     test('Valid offerCode', () => {
       expect(
@@ -75,7 +75,7 @@ describe('verify CalulateOffer function ', () => {
           offerCode: 'OFR002',
           basePrice: 100,
         })
-      ).toEqual({ price: 1767, discount: 133 })
+      ).toEqual({ price: 1767, discount: 133, pkgId: 'PKG1' })
     })
     test('Valid 2 or more offerCodes ', () => {
       expect(
@@ -86,7 +86,7 @@ describe('verify CalulateOffer function ', () => {
           offerCode: 'OFR002 OFR003',
           basePrice: 100,
         })
-      ).toEqual({ price: 1767, discount: 133 })
+      ).toEqual({ price: 1767, discount: 133, pkgId: 'PKG1' })
     })
   })
 })

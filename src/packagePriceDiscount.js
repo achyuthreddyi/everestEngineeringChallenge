@@ -13,10 +13,17 @@ function getPackagePriceDiscount({
   costOfUnitDistance = 5,
   costOfUnitWeight = 10,
 }) {
+  pkgWeightInKg = parseInt(pkgWeightInKg)
+  basePrice = parseInt(basePrice)
+  distanceInKm = parseInt(distanceInKm)
+  offerCode = offerCode.toUpperCase()
+
   if (
     !pkgId ||
     !pkgWeightInKg ||
     !distanceInKm ||
+    !costOfUnitDistance ||
+    !costOfUnitWeight ||
     typeof pkgWeightInKg !== 'number' ||
     typeof distanceInKm !== 'number'
   )
@@ -34,7 +41,7 @@ function getPackagePriceDiscount({
       .split(/[ ,]+/)
       .find(element => offerCodes.hasOwnProperty(element.toUpperCase()))
 
-  if (!offerCode) return { price, discount }
+  if (!offerCode) return { price, discount, pkgId }
 
   if (
     isBetween(
@@ -52,7 +59,7 @@ function getPackagePriceDiscount({
     price = price - discount
   }
 
-  return { price, discount }
+  return { price, discount, pkgId }
 }
 
 module.exports = getPackagePriceDiscount
