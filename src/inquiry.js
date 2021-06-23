@@ -110,13 +110,13 @@ module.exports = {
       },
       {
         type: 'input',
-        name: 'noOfPackages',
-        message: 'Please Enter the no of packages',
+        name: 'maxSpeed',
+        message: 'Please Enter the maximum speed of vehicle',
         validate: function (value) {
           if (value.length && typeof parseInt(value) == 'number') {
             return true
           } else {
-            return 'Please enter the no of packages'
+            return 'Please enter the maximum speed of vehicle'
           }
         },
       },

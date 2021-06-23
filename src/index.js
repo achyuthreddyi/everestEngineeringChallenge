@@ -2,13 +2,13 @@ const chalk = require('chalk')
 const Table = require('cli-table3')
 const rl = require('readline')
 const figlet = require('figlet')
-
 const inquire = require('./inquiry')
 
 const getAllOfferCodes = require('./wrapper/getAllOfferCodes')
 const getDeliveryPriceDiscount = require('./wrapper/getDeliveryPriceDiscount')
 const getAllDeliveryTime = require('./wrapper/getDeliveryTime')
 const putNewOfferCode = require('./wrapper/putNewOffer')
+const getAllPkgDeliveryTime = require('./wrapper/getDeliveryTime')
 
 console.log(
   chalk.yellow(
@@ -27,20 +27,21 @@ const runApp = async () => {
       await getDeliveryPriceDiscount()
       break
     case 'Calculate delivery time':
-      await getDeliveryPriceDiscount()
+      await getAllPkgDeliveryTime()
       break
     case 'Get all existing offercodes':
-      getAllOfferCodes()
+      await getAllOfferCodes()
       break
     case 'Calculate delivery time':
-      getAllDeliveryTime()
+      await getAllDeliveryTime()
       break
     case 'Add new offercode':
-      putNewOfferCode()
+      await putNewOfferCode()
       break
+
     case 'Exit':
       process.exit(0)
-      break
+
     default:
       break
   }

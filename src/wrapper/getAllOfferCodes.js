@@ -31,5 +31,5 @@ function getAllOfferCodes() {
   })
   console.log(table.toString())
 }
-// getAllOfferCodes()
+
 module.exports = getAllOfferCodes

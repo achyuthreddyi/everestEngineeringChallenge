@@ -1,6 +1,6 @@
-const getNextPossibleShipmentsList = require('./util/nextPossibleShipmentList')
-const getClosestShipment = require('./util/closestShipment')
-const getPackagePriceDiscount = require('./packagePriceDiscount')
+const getNextPossibleShipmentsList = require("./util/nextPossibleShipmentList")
+const getClosestShipment = require("./util/closestShipment")
+const getPackagePriceDiscount = require("./packagePriceDiscount")
 
 function getPackageDeliveryTime({
   noOfPackages,
@@ -10,23 +10,26 @@ function getPackageDeliveryTime({
   maxCarriableCapacity,
   basePrice,
 }) {
+  console.log(
+    noOfPackages,
+    packageList,
+    noOfVehicles,
+    maxSpeed,
+    maxCarriableCapacity,
+    basePrice
+  )
   if (
     !noOfPackages ||
     !packageList ||
-    packageList.length !== noOfPackages ||
     !maxSpeed ||
     !noOfVehicles ||
-    !maxCarriableCapacity ||
-    packageList.some(
-      element => element.weight === undefined || element.distance === undefined
-    )
+    !maxCarriableCapacity
   )
-    return 'Please enter all the elements in the input array for the given length '
+    return "Please enter all the elements in the input array for the given length "
 
   const vehicleAvailabilityArray = Array(noOfVehicles).fill(0)
 
   let newUpdatedPackageList = [...packageList]
-  let arrayLength = packageList.length
 
   let packagesWithDuration = []
 
@@ -41,7 +44,7 @@ function getPackageDeliveryTime({
 
     let durationForSingleTrip = 0
 
-    nextDelivery.forEach(element => {
+    nextDelivery.forEach((element) => {
       let currentPackage = packageList[element]
       let calculatedTimeOfPkg = {}
 
@@ -53,7 +56,10 @@ function getPackageDeliveryTime({
 
       calculatedTimeOfPkg.duration =
         Math.trunc((nextAvailabeAt + deliveryTime) * 100) / 100
+
       calculatedTimeOfPkg.pkgId = currentPackage.pkgId
+
+      console.log("duration at each place")
 
       const packagePriceDiscount = getPackagePriceDiscount({
         pkgId: currentPackage.pkgId,
@@ -63,13 +69,9 @@ function getPackageDeliveryTime({
         offerCode: currentPackage.offerCode,
       })
 
-      currentPackage.deliveryCost = packagePriceDiscount.price
       calculatedTimeOfPkg.deliveryCost = packagePriceDiscount.price
 
-      // currentPackage.discount = packagePriceDiscount.discount
-      // calculatedTimeOfPkg.discount = packagePriceDiscount.discount
-      currentPackage.discount = 0
-      calculatedTimeOfPkg.discount = 0
+      calculatedTimeOfPkg.discount = packagePriceDiscount.discount
 
       durationForSingleTrip = Math.max(deliveryTime, durationForSingleTrip)
       packagesWithDuration.push(calculatedTimeOfPkg)
@@ -77,13 +79,60 @@ function getPackageDeliveryTime({
 
     vehicleAvailabilityArray[vehicleAvailabilityArray.indexOf(nextAvailabeAt)] =
       nextAvailabeAt + 2 * durationForSingleTrip
+    console.log("vehicle avalilabilty array", vehicleAvailabilityArray)
 
     newUpdatedPackageList = newUpdatedPackageList.filter(
-      element => element.duration === undefined
+      (element) => element.duration === undefined
     )
   }
 
   return packagesWithDuration
 }
+// console.log(
+//   getPackageDeliveryTime({
+//     noOfPackages: 5,
+//     packageList: [
+//       {
+//         pkgId: "PKG1",
+//         weight: 50,
+//         index: 0,
+//         distance: 30,
+//         offerCode: "OFR0061",
+//       },
+//       {
+//         pkgId: "PKG2",
+//         weight: 75,
+//         index: 1,
+//         distance: 125,
+//         offerCode: "OFR0008",
+//       },
+//       {
+//         pkgId: "PKG3",
+//         weight: 175,
+//         index: 2,
+//         distance: 100,
+//         offerCode: "OFR0002",
+//       },
+//       {
+//         pkgId: "PKG4",
+//         weight: 110,
+//         index: 3,
+//         distance: 60,
+//         offerCode: "NA",
+//       },
+//       {
+//         pkgId: "PKG5",
+//         weight: 155,
+//         index: 4,
+//         distance: 95,
+//         offerCode: "OFR004",
+//       },
+//     ],
+//     maxSpeed: 70,
+//     noOfVehicles: 2,
+//     maxCarriableCapacity: 200,
+//     basePrice: 100,
+//   })
+// )
 
 module.exports = getPackageDeliveryTime
