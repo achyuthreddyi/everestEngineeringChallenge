@@ -6,20 +6,13 @@ const figlet = require('figlet')
 const inquire = require('./inquiry')
 
 const getDeliveryPriceDiscount = require('./getDeliveryPriceDiscount')
+const getAllOfferCodes = require('./getAllOfferCodes')
 
 console.log(
-  chalk.red(
+  chalk.yellow(
     figlet.textSync('Everest Engineering', { horizontalLayout: 'full' })
   )
 )
-
-const getAllOfferCodes = () => {
-  //  const table = new Table({
-  //    head: ['Package Id', 'Package Discount', 'Package Price'],
-  //    colWidths: [15, 23, 18],
-  //    wordWrap: true,
-  //  })
-}
 
 const runApp = async () => {
   const { typeOfFunctionality } = await inquire.askTypeFunction()
@@ -27,7 +20,6 @@ const runApp = async () => {
   switch (typeOfFunctionality) {
     case 'calculate delivery cost':
       getDeliveryPriceDiscount()
-
       break
     case 'get all existing offercodes':
       getAllOfferCodes()
