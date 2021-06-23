@@ -1,7 +1,7 @@
-const getPackageDeliveryTime = require("../packageDeliveryTime")
-const inquire = require("../inquiry")
-const chalk = require("chalk")
-const Table = require("cli-table3")
+const getPackageDeliveryTime = require('../packageDeliveryTime')
+const inquire = require('../inquiry')
+const chalk = require('chalk')
+const Table = require('cli-table3')
 
 const getAllPkgDeliveryTime = async () => {
   const { basePrice, noOfPackages } = await inquire.askBaseCostNoofPkgs()
@@ -9,17 +9,17 @@ const getAllPkgDeliveryTime = async () => {
 
   const table = new Table({
     head: [
-      "Package Id",
-      "Package Discount",
-      "Package Price",
-      "Package Delivery Time",
+      'Package Id',
+      'Package Discount',
+      'Package Price',
+      'Package Delivery Time',
     ],
     colWidths: [15, 23, 18, 23],
     wordWrap: true,
   })
 
   for (let i = 0; i < noOfPackages; i++) {
-    console.log("enter the details of package", i + 1)
+    console.log('enter the details of package', i + 1)
     const { pkgId, pkgWeightInKg, distanceInKm, offerCode } =
       await inquire.askQuestionsForDeliveryCost()
     packageList.push({
@@ -41,18 +41,20 @@ const getAllPkgDeliveryTime = async () => {
     noOfVehicles: noOfVehicles,
     basePrice: basePrice,
   })
-  console.log("packageDeliveryTimes", packageDeliveryTimes)
-  packageDeliveryTimes.forEach((element) =>
-    table.push([
-      element.pkgId,
-      element.discount,
-      element.deliveryCost,
-      element.duration,
-    ])
-  )
+
+  packageDeliveryTimes.forEach(element => {
+    element.duration === undefined
+      ? table.push(['Please enter ', 'valid data', 'inputs'])
+      : table.push([
+          element.pkgId,
+          element.discount,
+          element.deliveryCost,
+          element.duration,
+        ])
+  })
 
   console.log(
-    chalk.green("calculated delivery time along with discount and price")
+    chalk.green('calculated delivery time along with discount and price')
   )
   console.log(table.toString())
 }
