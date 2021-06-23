@@ -41,7 +41,6 @@ const runApp = async () => {
     case 'Exit':
       process.exit(0)
       break
-
     default:
       break
   }
