@@ -1,5 +1,3 @@
-Normal Text
-
 # Everest engineering coding challenge
 
 ##### _This challenge has two problems to be solved_
@@ -14,4 +12,14 @@ This problems involves a calculation of price of a package after the offer code 
 
 only one offer code can applied on any package.
 
-total delivery cost
+total delivery cost is calculated based on
+
+## base delivery cost + weight _ unit weight cost + distance _ unit distance cost
+
+offer code is applied on the total delivery cost if applicable and the actual cost of the package is calculated by subtracting the discount amount from the total delivery cost
+
+offercodes are stored in json format and retrived as a file and new offercodes can be added. Updating and deleting the offercodes functionality ate not implemented due time constraints.
+
+# Problem 02
+
+This problem involves estimation of the delivery time
