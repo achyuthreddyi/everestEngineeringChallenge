@@ -14,7 +14,7 @@ describe('verify CalulateOffer function ', () => {
         getPackagePriceDiscount({
           pkgId: 'PKG1',
           pkgWeightInKg: 3,
-          distanceInKm: '5',
+          distanceInKm: 'any input',
           basePrice: 100,
           offerCode: 'OFR001',
         })

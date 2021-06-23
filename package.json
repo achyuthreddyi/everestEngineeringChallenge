@@ -16,7 +16,6 @@
     "chalk": "^4.1.1",
     "cli-table3": "^0.6.0",
     "figlet": "^1.5.0",
-    "inquirer": "^8.1.1",
-    "standard": "^16.0.3"
+    "inquirer": "^8.1.1"
   }
 }

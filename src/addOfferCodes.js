@@ -9,6 +9,12 @@ function addNewOfferCode({
   minDistance,
   maxDistance,
 }) {
+  discount = parseInt(discount)
+  minWeight = parseInt(minWeight)
+  maxWeight = parseInt(maxWeight)
+  minDistance = parseInt(minDistance)
+  maxDistance = parseInt(maxDistance)
+
   if (
     !offerId ||
     !discount ||
@@ -18,8 +24,6 @@ function addNewOfferCode({
     !maxDistance
   )
     return 'Please enter all valid inputs'
-
-  console.log(offerId, discount, minWeight, maxWeight, minDistance, maxDistance)
 
   offerCodes[offerId.toUpperCase()] = {
     discount,
@@ -32,7 +36,7 @@ function addNewOfferCode({
       max: maxWeight,
     },
   }
-  fs.writeFileSync('offerCodes.json', JSON.stringify(offerCodes), err => {
+  fs.writeFile('src/offerCodes.json', JSON.stringify(offerCodes), err => {
     if (err) throw err
   })
   console.log('Offer added successfully')

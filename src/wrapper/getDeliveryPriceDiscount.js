@@ -1,6 +1,6 @@
-const inquire = require('./inquiry')
+const inquire = require('../inquiry')
 const Table = require('cli-table3')
-const getPackagePriceDiscount = require('./packagePriceDiscount')
+const getPackagePriceDiscount = require('../packagePriceDiscount')
 const chalk = require('chalk')
 
 const getDeliveryPriceDiscount = async () => {

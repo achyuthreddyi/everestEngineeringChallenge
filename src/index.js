@@ -5,12 +5,17 @@ const figlet = require('figlet')
 
 const inquire = require('./inquiry')
 
-const getDeliveryPriceDiscount = require('./getDeliveryPriceDiscount')
-const getAllOfferCodes = require('./getAllOfferCodes')
+const getAllOfferCodes = require('./wrapper/getAllOfferCodes')
+const getDeliveryPriceDiscount = require('./wrapper/getDeliveryPriceDiscount')
+const getAllDeliveryTime = require('./wrapper/getDeliveryTime')
+const putNewOfferCode = require('./wrapper/putNewOffer')
 
 console.log(
   chalk.yellow(
-    figlet.textSync('Everest Engineering', { horizontalLayout: 'full' })
+    figlet.textSync('Everest Engineering', {
+      horizontalLayout: 'full',
+      verticalLayout: 'controlled smushing',
+    })
   )
 )
 
@@ -18,15 +23,29 @@ const runApp = async () => {
   const { typeOfFunctionality } = await inquire.askTypeFunction()
 
   switch (typeOfFunctionality) {
-    case 'calculate delivery cost':
-      getDeliveryPriceDiscount()
+    case 'Calculate delivery cost':
+      await getDeliveryPriceDiscount()
       break
-    case 'get all existing offercodes':
+    case 'Calculate delivery time':
+      await getDeliveryPriceDiscount()
+      break
+    case 'Get all existing offercodes':
       getAllOfferCodes()
+      break
+    case 'Calculate delivery time':
+      getAllDeliveryTime()
+      break
+    case 'Add new offercode':
+      putNewOfferCode()
+      break
+    case 'Exit':
+      process.exit(0)
       break
 
     default:
       break
   }
+  runApp()
 }
+
 runApp()

@@ -1,4 +1,4 @@
-const offerCodes = require('./offerCodes.json')
+const offerCodes = require('../offerCodes.json')
 const chalk = require('chalk')
 const Table = require('cli-table3')
 
@@ -16,18 +16,20 @@ const table = new Table({
 })
 
 function getAllOfferCodes() {
-  console.log(chalk.green('getting all offer codes'))
-  Object.keys(offerCodes).forEach(element =>
+  console.log(chalk.green('All the existing offer codes'))
+
+  Object.keys(offerCodes).forEach(element => {
+    const offer = offerCodes[element]
     table.push([
       element,
-      offerCodes[element].discount,
-      offerCodes[element].distanceRange.min,
-      offerCodes[element].distanceRange.max,
-      offerCodes[element].weightRange.min,
-      offerCodes[element].weightRange.max,
+      offer.discount,
+      offer.distanceRange.min,
+      offer.distanceRange.max,
+      offer.weightRange.min,
+      offer.weightRange.max,
     ])
-  )
+  })
   console.log(table.toString())
 }
-
+// getAllOfferCodes()
 module.exports = getAllOfferCodes

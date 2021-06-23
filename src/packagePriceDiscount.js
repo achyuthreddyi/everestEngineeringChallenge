@@ -16,7 +16,7 @@ function getPackagePriceDiscount({
   pkgWeightInKg = parseInt(pkgWeightInKg)
   basePrice = parseInt(basePrice)
   distanceInKm = parseInt(distanceInKm)
-  offerCode = offerCode.toUpperCase()
+  offerCode = offerCode && offerCode.toUpperCase()
 
   if (
     !pkgId ||
