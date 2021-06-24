@@ -22,4 +22,26 @@ offercodes are stored in json format and retrived as a file and new offercodes c
 
 # Problem 02
 
-This problem involves estimation of the delivery time
+This problem involves estimation of the delivery time for all the packages based on the weights given.Heavier packages has to be chosen among the available packages but below the maximum carriable capacity of the vehicle. The shipment which can be delivered first has to be chosen when their weights are same.
+
+### Certain Assumptions made
+
+- All vehicles travel at the same speed and in same route
+
+* All destinations are covered in a single route
+
+## Packages used
+
+- chalk --> to style the strings in hte command line
+
+* cli-table3 --> to render the table on the command line
+
+* figlet --> to implement the big font spec on the terminal
+* inquirer --> to implement the ask question feature
+
+```commands
+    npm install
+    npm start
+
+
+```

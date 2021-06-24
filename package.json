@@ -4,7 +4,7 @@
   "description": "coding challenge by everest engineering",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest ",
     "start": "node ./src/index.js "
   },
   "author": "achyuth reddy",
